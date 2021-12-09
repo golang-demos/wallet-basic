@@ -13,6 +13,11 @@
 
 
 ## Run
+### Production Mode
 ```
 docker-compose -f docker-compose.yml up
+```
+### Development Mode
+```
+docker-compose -f docker-compose.dev.yml up
 ```
