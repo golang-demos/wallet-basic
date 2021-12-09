@@ -12,13 +12,10 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
+	err := godotenv.Load(".env.dev")
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
-	// dbConnectionURI := os.Getenv("ECOMM_DB_CONN_URI")
-	apiServerPort := os.Getenv("ECOMM_APP_PORT")
 
 	database.ConnectDB()
 
@@ -26,5 +23,6 @@ func main() {
 
 	controllers.RegisterRoutes(app)
 
+	apiServerPort := os.Getenv("ECOMM_APP_PORT")
 	log.Fatal(app.Listen(apiServerPort))
 }
