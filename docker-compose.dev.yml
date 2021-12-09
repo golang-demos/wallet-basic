@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  ecommerce_mongo_prod:
+    build: db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+      - ./data:/data
