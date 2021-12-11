@@ -1,11 +1,25 @@
 package controllers
 
 import (
+	"log"
+
 	"github.com/gofiber/fiber/v2"
+
+	"github.com/golang-demos/ecommerce-basic/helpers"
+	"github.com/golang-demos/ecommerce-basic/models"
 )
 
 func apiV1Handler(c *fiber.Ctx) error {
-	return nil
+	sessToken := string(c.Request().Header.Peek("SESS-TOKEN"))
+	var user *models.User
+	if sessToken != "" {
+		user = helpers.GetUserBySessionId(sessToken)
+	}
+	c.Locals("SessionUser", user.ToShort())
+
+	log.Print("SessToken : ", string(sessToken))
+	log.Print("userId : ", user)
+	return c.Next()
 }
 
 func RegisterRoutes(app *fiber.App) {

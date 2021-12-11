@@ -5,7 +5,8 @@ import (
 )
 
 func sessionDetailsHandler(c *fiber.Ctx) error {
-	return nil
+	loggedInUser := c.Locals("SessionUser")
+	return c.JSON(loggedInUser)
 }
 func sessionLoginHandler(c *fiber.Ctx) error {
 	return nil
