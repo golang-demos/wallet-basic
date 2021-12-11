@@ -15,7 +15,6 @@ func ConnectDB() {
 	ctx := context.Background()
 	dbConnectionURI := os.Getenv("ECOMM_DB_CONN_URI")
 	Client, _ = mongo.Connect(ctx, options.Client().ApplyURI(dbConnectionURI))
-	defer DisconnectDB()
 }
 
 func DisconnectDB() {
