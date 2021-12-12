@@ -10,22 +10,22 @@ import (
 )
 
 var Client *mongo.Client
-
 var Db *mongo.Database
+
 var UserCollection *mongo.Collection
 
 func ConnectDB() {
-	ctx := context.Background()
 	dbConnectionURI := os.Getenv("ECOMM_DB_CONN_URI")
-	Client, _ = mongo.Connect(ctx, options.Client().ApplyURI(dbConnectionURI))
+	Client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(dbConnectionURI))
+	if err != nil {
+		panic(err)
+	}
 	Db = Client.Database(os.Getenv("ECOMM_DB_NAME"))
-
 	UserCollection = Db.Collection("users")
 }
 
 func DisconnectDB() {
-	ctx := context.Background()
-	if err := Client.Disconnect(ctx); err != nil {
+	if err := Client.Disconnect(context.Background()); err != nil {
 		panic(err)
 	}
 	log.Println("Database disconnected")
