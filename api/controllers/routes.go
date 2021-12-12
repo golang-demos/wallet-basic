@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"log"
-
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/golang-demos/ecommerce-basic/helpers"
@@ -14,11 +12,11 @@ func apiV1Handler(c *fiber.Ctx) error {
 	var user *models.User
 	if sessToken != "" {
 		user = helpers.GetUserBySessionId(sessToken)
+	} else {
+		user = new(models.User)
 	}
 	c.Locals("SessionUser", user.ToShort())
 
-	log.Print("SessToken : ", string(sessToken))
-	log.Print("userId : ", user)
 	return c.Next()
 }
 
