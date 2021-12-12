@@ -52,5 +52,7 @@ func sessionLoginHandler(c *fiber.Ctx) error {
 	}
 }
 func sessionLogoutHandler(c *fiber.Ctx) error {
-	return nil
+	return c.JSON(fiber.Map{
+		"success": true,
+	})
 }
