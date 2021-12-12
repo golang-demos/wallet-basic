@@ -1,22 +1,22 @@
 package controllers
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"context"
 
-	"github.com/golang-demos/ecommerce-basic/helpers"
+	"github.com/gofiber/fiber/v2"
+	"go.mongodb.org/mongo-driver/bson"
+
+	"github.com/golang-demos/ecommerce-basic/database"
 	"github.com/golang-demos/ecommerce-basic/models"
 )
 
 func apiV1Handler(c *fiber.Ctx) error {
+	c.Set("Content-Type", "application/json")
 	sessToken := string(c.Request().Header.Peek("SESS-TOKEN"))
-	var user *models.User
+	var user models.User
 	if sessToken != "" {
-		user = helpers.GetUserBySessionId(sessToken)
-	} else {
-		user = new(models.User)
+		database.UserCollection.FindOne(context.Background(), bson.M{"token": sessToken}).Decode(&user)
 	}
-	c.Locals("SessionUser", user.ToShort())
-
 	return c.Next()
 }
 

@@ -2,6 +2,7 @@ package models
 
 import (
 	"context"
+	"log"
 	"math/rand"
 
 	"crypto/md5"
@@ -15,7 +16,7 @@ import (
 )
 
 type User struct {
-	ID       primitive.ObjectID `json:"id,omitempty" bson="_id,omitempty"`
+	ID       primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	Name     string             `json:"name,omitempty" validate:"required,min=2,max=32" bson="name,omitempty"`
 	Mobile   string             `json:"mobile,omitempty" validate:"required,min=2,max=32" bson="mobile,omitempty"`
 	Role     string             `json:"role,omitempty" validate:"required,min=2,max=16" bson="role,omitempty"`
@@ -25,6 +26,11 @@ type User struct {
 
 type UserSignupData struct {
 	Name     string `json:"name" validate:"required,min=2,max=32"`
+	Mobile   string `json:"mobile" validate:"required,min=2,max=32"`
+	Password string `json:"password" validate:"required,min=2,max=16"`
+}
+
+type UserLoginData struct {
 	Mobile   string `json:"mobile" validate:"required,min=2,max=32"`
 	Password string `json:"password" validate:"required,min=2,max=16"`
 }
@@ -42,15 +48,28 @@ func (u *User) Init(postData UserSignupData) *User {
 	return u
 }
 
-func (u *User) ToShort() *User {
+func (u *User) ToShort() User {
 	var user User
 	user.ID = u.ID
 	user.Name = u.Name
+	user.Mobile = u.Mobile
 	user.Role = u.Role
-	return &user
+	return user
+}
+
+func (u *User) Print() {
+	msg := "\nID     : " + u.ID.String()
+	msg += "\nName   : " + u.Name
+	msg += "\nMobile : " + u.Mobile
+	msg += "\nRole   : " + u.Role
+	log.Print(msg)
 }
 
 func (u *User) Validate() []*ErrorResp {
+	return validateModelsForErrors(validator.New().Struct(u))
+}
+
+func (u *UserLoginData) Validate() []*ErrorResp {
 	return validateModelsForErrors(validator.New().Struct(u))
 }
 
@@ -79,4 +98,16 @@ func CreateUser(user *User) bool {
 	user.Password = hex.EncodeToString(hash[:])
 	result, _ := database.UserCollection.InsertOne(context.Background(), user)
 	return result != nil
+}
+
+func Login(mobile, password string) (bool, string) {
+
+	hash := md5.Sum([]byte(password))
+
+	var foundUser User
+	err := database.UserCollection.FindOne(context.Background(), bson.D{{"mobile", mobile}, {"passord", hash}}).Decode(&foundUser)
+	if err != nil {
+		log.Print(err)
+	}
+	return false, ""
 }
