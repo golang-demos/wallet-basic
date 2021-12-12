@@ -31,5 +31,15 @@ func CreateWallet(user *User) bool {
 	if alreadyExists {
 		return false
 	}
-	return true
+
+	wallet := &Wallet{
+		UserID:  user.ID,
+		Balance: 0.0,
+	}
+	result, _ := database.WalletColllection.InsertOne(context.Background(), wallet)
+	isCreated := false
+	if result != nil {
+		isCreated = true
+	}
+	return isCreated
 }
