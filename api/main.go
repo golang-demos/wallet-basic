@@ -18,6 +18,7 @@ func main() {
 	}
 
 	database.ConnectDB()
+	defer database.DisconnectDB()
 
 	app := fiber.New()
 
