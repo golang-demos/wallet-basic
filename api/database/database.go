@@ -12,12 +12,15 @@ import (
 var Client *mongo.Client
 
 var Db *mongo.Database
+var UserCollection *mongo.Collection
 
 func ConnectDB() {
 	ctx := context.Background()
 	dbConnectionURI := os.Getenv("ECOMM_DB_CONN_URI")
 	Client, _ = mongo.Connect(ctx, options.Client().ApplyURI(dbConnectionURI))
 	Db = Client.Database(os.Getenv("ECOMM_DB_NAME"))
+
+	UserCollection = Db.Collection("users")
 }
 
 func DisconnectDB() {
