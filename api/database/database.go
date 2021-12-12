@@ -13,6 +13,11 @@ var Client *mongo.Client
 var Db *mongo.Database
 
 var UserCollection *mongo.Collection
+var WalletColllection *mongo.Collection
+var TransactionColllection *mongo.Collection
+var ProductColllection *mongo.Collection
+var VariationColllection *mongo.Collection
+var OrderColllection *mongo.Collection
 
 func ConnectDB() {
 	dbConnectionURI := os.Getenv("ECOMM_DB_CONN_URI")
@@ -22,6 +27,11 @@ func ConnectDB() {
 	}
 	Db = Client.Database(os.Getenv("ECOMM_DB_NAME"))
 	UserCollection = Db.Collection("users")
+	WalletColllection = Db.Collection("wallets")
+	TransactionColllection = Db.Collection("transactions")
+	ProductColllection = Db.Collection("products")
+	VariationColllection = Db.Collection("variations")
+	OrderColllection = Db.Collection("orders")
 }
 
 func DisconnectDB() {
