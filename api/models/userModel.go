@@ -97,7 +97,12 @@ func CreateUser(user *User) bool {
 	hash := md5.Sum([]byte(user.Password))
 	user.Password = hex.EncodeToString(hash[:])
 	result, _ := database.UserCollection.InsertOne(context.Background(), user)
-	return result != nil
+	isCreated := false
+	if result != nil {
+		isCreated = true
+		CreateWallet(user)
+	}
+	return isCreated
 }
 
 func Login(mobile, password string) (bool, string) {
