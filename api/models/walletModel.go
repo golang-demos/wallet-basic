@@ -10,9 +10,9 @@ import (
 )
 
 type Wallet struct {
-	ID      primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	UserID  primitive.ObjectID `json:"user_id,omitempty" bson:"user_id,omitempty"`
-	Balance string             `json:"balance,omitempty" bson:"balance,omitempty"`
+	ID      primitive.ObjectID `json:"_id" bson:"_id"`
+	UserID  primitive.ObjectID `json:"user_id" bson:"user_id,"`
+	Balance float32            `json:"balance" bson:"balance"`
 }
 
 func (u *Wallet) Validate() []*ErrorResp {
@@ -34,7 +34,7 @@ func CreateWallet(user *User) bool {
 
 	wallet := &Wallet{
 		UserID:  user.ID,
-		Balance: "0.0",
+		Balance: 0.0,
 	}
 	result, _ := database.WalletColllection.InsertOne(context.Background(), wallet)
 	isCreated := false
