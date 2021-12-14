@@ -97,11 +97,12 @@ func CreateUser(user *User) bool {
 	hash := md5.Sum([]byte(user.Password))
 	user.Password = hex.EncodeToString(hash[:])
 	result, _ := database.UserCollection.InsertOne(context.Background(), user)
+	if objID, ok := result.InsertedID.(primitive.ObjectID); ok {
+		user.ID = objID
+	}
 	isCreated := false
-	log.Print(result.InsertedID)
 	if result != nil {
 		isCreated = true
-		user.ID = result.InsertedID.(primitive.ObjectID)
 		CreateWallet(user)
 	}
 	return isCreated
