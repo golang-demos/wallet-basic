@@ -98,8 +98,10 @@ func CreateUser(user *User) bool {
 	user.Password = hex.EncodeToString(hash[:])
 	result, _ := database.UserCollection.InsertOne(context.Background(), user)
 	isCreated := false
+	log.Print(result.InsertedID)
 	if result != nil {
 		isCreated = true
+		user.ID = result.InsertedID.(primitive.ObjectID)
 		CreateWallet(user)
 	}
 	return isCreated
