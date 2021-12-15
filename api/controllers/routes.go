@@ -39,7 +39,7 @@ func RegisterRoutes(app *fiber.App) {
 	// Get Wallet Details
 	v1.Get("/wallet/:id", walletDetailsHandler)
 	// Deposit to wallet
-	v1.Post("/wallet/deposit", walletDepositHandler)
+	v1.Post("/wallet/:id/make", walletDepositHandler)
 
 	// product
 	// Product API
