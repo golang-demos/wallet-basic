@@ -12,13 +12,14 @@ import (
 
 func walletDetailsHandler(c *fiber.Ctx) error {
 	id := c.Params("id")
+
 	userObjectId, _ := primitive.ObjectIDFromHex(id)
 
 	var wallet models.Wallet
-	cursor, _ := database.WalletColllection.Find(context.Background(), bson.M{
+	database.WalletColllection.FindOne(context.Background(), bson.M{
 		"user_id": userObjectId,
-	})
-	cursor.Decode(&wallet)
+	}).Decode(&wallet)
+
 	if wallet.ID.IsZero() {
 		c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"message": "Not found",
