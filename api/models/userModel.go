@@ -17,11 +17,11 @@ import (
 
 type User struct {
 	ID       primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Name     string             `json:"name,omitempty" validate:"required,min=2,max=32" bson="name,omitempty"`
-	Mobile   string             `json:"mobile,omitempty" validate:"required,min=2,max=32" bson="mobile,omitempty"`
-	Role     string             `json:"role,omitempty" validate:"required,min=2,max=16" bson="role,omitempty"`
-	Password string             `json:"password,omitempty" validate:"required,min=2,max=16" bson="password,omitempty"`
-	Token    string             `json:"token,omitempty" validate:"required,min=24,max=24" bson="token,omitempty"`
+	Name     string             `json:"name" validate:"required,min=2,max=32" bson="name"`
+	Mobile   string             `json:"mobile" validate:"required,min=2,max=32" bson="mobile"`
+	Role     string             `json:"role" validate:"required,min=2,max=16" bson="role"`
+	Password string             `json:"password" validate:"required,min=2,max=16" bson="password"`
+	Token    string             `json:"token" validate:"required,min=24,max=24" bson="token"`
 }
 
 type UserSignupData struct {
