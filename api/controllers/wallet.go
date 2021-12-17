@@ -91,7 +91,8 @@ func walletDepositHandler(c *fiber.Ctx) error {
 	_, err = database.WalletColllection.UpdateOne(context.Background(), filter, udpateData)
 
 	if err != nil {
-		// TODO: Delete transaction at this point
+		// Delete transaction at this point
+		database.TransactionColllection.DeleteOne(context.Background(), bson.M{"_id": transaction.ID})
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
 			"error":   "Failed to update balance",
