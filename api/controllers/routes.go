@@ -41,31 +41,4 @@ func RegisterRoutes(app *fiber.App) {
 	// Deposit to wallet
 	v1.Post("/wallet/:id/make", walletDepositHandler)
 
-	// product
-	// Product API
-	v1.Post("/product/list", productListHandler)
-	// 	- Create, Update, Delete
-	v1.Get("/product/:productId", productDetailsHandler)
-	v1.Post("/product", productCreateHandler)
-	v1.Put("/product/:productId", productUpdateHandler)
-	v1.Delete("/product/:productId", productDeleteHandler)
-
-	// variation
-	// Variations API
-	v1.Get("/variations/list", variationListHandler)
-	// 	- Create, Update, Delete
-	v1.Get("/variation/:productId", variationDetailsHandler)
-	v1.Post("/variation", variationCreateHandler)
-	v1.Put("/variation/:variationId", variationUpdateHandler)
-	v1.Delete("/variation/:variationId", variationDeleteHandler)
-
-	// order
-	// Order API
-	v1.Get("/order/list", orderListHandler)
-	// 	- Create, Update, Cancel
-	v1.Get("/order/:productId", orderDetailsHandler)
-	v1.Post("/order", orderCreateHandler)
-	v1.Put("/order/:orderId", orderUpdateHandler)
-	v1.Delete("/order/:orderId", orderDeleteHandler)
-
 }
