@@ -61,7 +61,7 @@ Input:
 	password : Password for login
 
 
-Example:
+Sample Request:
 ```
 curl --location --request POST "http://localhost:3000/api/v1/signup" \
 --header 'Content-Type: application/json' \
@@ -72,7 +72,7 @@ curl --location --request POST "http://localhost:3000/api/v1/signup" \
 }'
 ```
 
-Response:
+Sample Response:
 ```json
 {
     "success": true,
@@ -100,7 +100,7 @@ Input:
 	mobile   : User's mobile number
 	password : User's password
 
-Example:
+Sample Request:
 ```
 curl --location --request POST "http://localhost:3000/api/v1/session/login" \
 --header 'Content-Type: application/json' \
@@ -110,7 +110,7 @@ curl --location --request POST "http://localhost:3000/api/v1/session/login" \
 }'
 ```
 
-Response:
+Sample Response:
 ```json
 {
     "isLoggedIn": true,
@@ -132,13 +132,13 @@ Details:
 | Authentication | `Optional`   |
 | Description    | This API is used for fetching currently logged in user's details. This information is derieved from the value of `SESS-TOKEN` HTTP Header. |
 
-Example: (Please substitute `<SESS-TOKEN>` with right value)
+Sample Request: (Please substitute `<SESS-TOKEN>` with right value)
 ```
 curl --location --request GET "http://localhost:3000/api/v1/session/get" \
 --header 'SESS-TOKEN: <SESS-TOKEN>'
 ```
 
-Response:
+Sample Response:
 ```json
 {
     "LoggedIn": true,
@@ -166,7 +166,7 @@ Input:
 	trans_type : `credit` to indicate deposit transaction.
 	amount     : Amount in float
 
-Example:
+Sample Request:
 ```
 curl --location --request POST "http://localhost:3000/api/v1/wallet/make" \
 --header 'SESS-TOKEN: <SESS-TOKEN>' \
@@ -177,7 +177,7 @@ curl --location --request POST "http://localhost:3000/api/v1/wallet/make" \
 }'
 ```
 
-Response:
+Sample Response:
 ```json
 {
     "balance": 500,
@@ -202,7 +202,7 @@ Input:
 	trans_type : `debit` to indicate withdraw transaction.
 	amount     : Amount in float
 
-Example:
+Sample Request:
 ```
 curl --location --request POST "http://localhost:3000/api/v1/wallet/make" \
 --header 'SESS-TOKEN: <SESS-TOKEN>' \
@@ -213,7 +213,7 @@ curl --location --request POST "http://localhost:3000/api/v1/wallet/make" \
 }'
 ```
 
-Response:
+Sample Response:
 ```json
 {
     "balance": 500,
@@ -233,13 +233,13 @@ Details:
 | Authentication | `Required`   |
 | Description    | This API is used for withdrawing money from user's wallet. It also gives updated balance in response. |
 
-Example:
+Sample Request:
 ```
 curl --location --request GET "http://localhost:3000/api/v1/wallet" \
 --header 'SESS-TOKEN: <SESS-TOKEN>'
 ```
 
-Response:
+Sample Response:
 ```json
 {
     "balance": 500,
@@ -258,13 +258,13 @@ Details:
 | Authentication | `Required`   |
 | Description    | This API is used for fetching complete statement of wallet transactions. |
 
-Example:
+Sample Request:
 ```
 curl --location --request GET "http://localhost:3000/api/v1/wallet/statement" \
 --header 'SESS-TOKEN: <SESS-TOKEN>'
 ```
 
-Response:
+Sample Response:
 ```json
 [
     {
