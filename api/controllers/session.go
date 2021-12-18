@@ -23,7 +23,7 @@ func sessionDetailsHandler(c *fiber.Ctx) error {
 	}
 	return c.JSON(&struct {
 		LoggedIn bool
-		User     models.User
+		User     models.ShortUser
 	}{
 		LoggedIn: isLoggedIn,
 		User:     user.ToShort(),
