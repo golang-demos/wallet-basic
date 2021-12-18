@@ -1,4 +1,4 @@
-### Ecommerce Basic Example using
+### Wallet Basic System
 
 ## Table Of Contents
 - [Dependencies](#dependencies)
