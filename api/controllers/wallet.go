@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"context"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-demos/ecommerce-basic/database"
@@ -115,8 +116,9 @@ func walletStatementHandler(c *fiber.Ctx) error {
 		var transaction models.Transaction
 		cursor.Decode(&transaction)
 		transactionList = append(transactionList, fiber.Map{
-			"amount": transaction.Amount,
-			"type":   transaction.TransType,
+			"amount":     transaction.Amount,
+			"type":       transaction.TransType,
+			"created_at": time.Unix(int64(transaction.CreatedAt.T), 0).String(),
 		})
 	}
 
