@@ -78,7 +78,7 @@ Sample Response:
     "success": true,
     "user": {
         "name": "Vinay Jeurkar",
-        "mobile": "9766941950",
+        "mobile": "9766123123",
         "role": "user"
     }
 }
