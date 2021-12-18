@@ -1,4 +1,4 @@
-### Wallet Basic System
+# Wallet Basic System
 
 ## Table Of Contents
 - [Dependencies](#dependencies)
@@ -289,3 +289,9 @@ Sample Response:
     }
 ]
 ```
+
+
+## Author
+Vinay Jeurkar
+- [Github](https://github.com/vinay03)
+- [LinkedIn](https://www.linkedin.com/in/vinay-jeurkar/)
