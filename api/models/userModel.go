@@ -89,10 +89,10 @@ func checkIfExists(user *User) bool {
 	return err == nil
 }
 
-func CreateUser(user *User) bool {
+func CreateUser(user *User) (bool, *User) {
 	alreadyExists := checkIfExists(user)
 	if alreadyExists {
-		return false
+		return false, &User{}
 	}
 	hash := md5.Sum([]byte(user.Password))
 	user.Password = hex.EncodeToString(hash[:])
@@ -105,7 +105,7 @@ func CreateUser(user *User) bool {
 		isCreated = true
 		CreateWallet(user)
 	}
-	return isCreated
+	return isCreated, user
 }
 
 func Login(mobile, password string) (bool, string) {
