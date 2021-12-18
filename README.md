@@ -1,5 +1,4 @@
 ### Ecommerce Basic Example using
-<hr>
 
 1. Go Language
 2. Mux Router : `go get github.com/gorilla/mux`
@@ -8,15 +7,11 @@
 
 
 ## Modules
-<hr>
-
 - User Sign-In, Signup
 - Wallet: Credit, Debit
 
 
 ## Run
-<hr>
-
 ### Production Mode
 ```
 docker-compose -f docker-compose.yml up
@@ -49,7 +44,7 @@ Input:
 
 
 Example:
-```json
+```
 curl --location --request POST "http://localhost:3000/api/v1/signup" \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -88,7 +83,7 @@ Input:
 	password : User's password
 
 Example:
-```json
+```
 curl --location --request POST "http://localhost:3000/api/v1/session/login" \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -111,16 +106,16 @@ Response:
 #### Session Details
 <hr>
 
-API    : `/api/v1/signup`
-
-Method : `GET`
-
-Authentication   : `Optional`
-
-Description: This API is used for fetching currently logged in user's details. This information is derieved from the value of `SESS-TOKEN` HTTP Header.
+Details:
+| Property       | Value            |
+| -------------- | -----------      |
+| API            | `/api/v1/signup` |
+| Method         | `GET`           |
+| Authentication | `Optional`   |
+| Description    | This API is used for fetching currently logged in user's details. This information is derieved from the value of `SESS-TOKEN` HTTP Header. |
 
 Example: (Please substitute `<SESS-TOKEN>` with right value)
-```json
+```
 curl --location --request GET "http://localhost:3000/api/v1/session/get" \
 --header 'SESS-TOKEN: <SESS-TOKEN>'
 ```
@@ -140,13 +135,13 @@ Response:
 #### Deposit to Wallet
 <hr>
 
-API    : `/api/v1/wallet/make`
-
-Method : `POST`
-
-Authentication   : `Required`
-
-Description: This API is used for adding money to user's wallet. It also gives updated balance in response.
+Details:
+| Property       | Value            |
+| -------------- | -----------      |
+| API            | `/api/v1/wallet/make` |
+| Method         | `POST`           |
+| Authentication | `Required`   |
+| Description    | This API is used for adding money to user's wallet. It also gives updated balance in response. |
 
 Input: 
 
@@ -154,7 +149,7 @@ Input:
 	amount     : Amount in float
 
 Example:
-```json
+```
 curl --location --request POST "http://localhost:3000/api/v1/wallet/make" \
 --header 'SESS-TOKEN: <SESS-TOKEN>' \
 --header 'Content-Type: application/json' \
@@ -176,13 +171,13 @@ Response:
 #### Withdraw from Wallet
 <hr>
 
-API    : `/api/v1/wallet/make`
-
-Method : `POST`
-
-Authentication   : `Required`
-
-Description: This API is used for withdrawing money from user's wallet. It also gives updated balance in response.
+Details:
+| Property       | Value            |
+| -------------- | -----------      |
+| API            | `/api/v1/wallet/make` |
+| Method         | `POST`           |
+| Authentication | `Required`   |
+| Description    | This API is used for withdrawing money from user's wallet. It also gives updated balance in response. |
 
 Input: 
 
@@ -190,7 +185,7 @@ Input:
 	amount     : Amount in float
 
 Example:
-```json
+```
 curl --location --request POST "http://localhost:3000/api/v1/wallet/make" \
 --header 'SESS-TOKEN: <SESS-TOKEN>' \
 --header 'Content-Type: application/json' \
@@ -212,13 +207,13 @@ Response:
 #### Check Wallet Balance
 <hr>
 
-API    : `/api/v1/wallet`
-
-Method : `GET`
-
-Authentication   : `Required`
-
-Description: This API is used for withdrawing money from user's wallet. It also gives updated balance in response.
+Details:
+| Property       | Value            |
+| -------------- | -----------      |
+| API            | `/api/v1/wallet` |
+| Method         | `GET`           |
+| Authentication | `Required`   |
+| Description    | This API is used for withdrawing money from user's wallet. It also gives updated balance in response. |
 
 Example:
 ```json
@@ -237,13 +232,13 @@ Response:
 #### Get Wallet Statement
 <hr>
 
-API    : `/api/v1/wallet/statement`
-
-Method : `GET`
-
-Authentication   : `Required`
-
-Description: This API is used for fetching complete statement of wallet transactions.
+Details:
+| Property       | Value            |
+| -------------- | -----------      |
+| API            | `/api/v1/wallet/statement` |
+| Method         | `GET`           |
+| Authentication | `Required`   |
+| Description    | This API is used for fetching complete statement of wallet transactions. |
 
 Example:
 ```json
