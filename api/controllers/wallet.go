@@ -99,3 +99,26 @@ func walletDepositHandler(c *fiber.Ctx) error {
 		"balance": wallet.Balance,
 	})
 }
+
+func walletStatementHandler(c *fiber.Ctx) error {
+	userObjectId := c.Locals("SESSION_USER_ID")
+	var transactionList []fiber.Map
+	cursor, err := database.TransactionColllection.Find(context.Background(), bson.M{
+		"user_id": userObjectId,
+	})
+	if err != nil {
+		return c.JSON(transactionList)
+	}
+
+	ctx := context.Background()
+	for cursor.Next(ctx) {
+		var transaction models.Transaction
+		cursor.Decode(&transaction)
+		transactionList = append(transactionList, fiber.Map{
+			"amount": transaction.Amount,
+			"type":   transaction.TransType,
+		})
+	}
+
+	return c.JSON(transactionList)
+}
