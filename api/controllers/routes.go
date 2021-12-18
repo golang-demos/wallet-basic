@@ -17,6 +17,7 @@ func apiV1Handler(c *fiber.Ctx) error {
 	if sessToken != "" {
 		database.UserCollection.FindOne(context.Background(), bson.M{"token": sessToken}).Decode(&user)
 	}
+	c.Locals("SESSION_USER_ID", user.ID)
 	return c.Next()
 }
 
@@ -37,8 +38,8 @@ func RegisterRoutes(app *fiber.App) {
 
 	// wallet
 	// Get Wallet Details
-	v1.Get("/wallet/:id", walletDetailsHandler)
+	v1.Get("/wallet", walletDetailsHandler)
 	// Deposit to wallet
-	v1.Post("/wallet/:id/make", walletDepositHandler)
+	v1.Post("/wallet/make", walletDepositHandler)
 
 }

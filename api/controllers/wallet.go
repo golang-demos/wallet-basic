@@ -7,13 +7,10 @@ import (
 	"github.com/golang-demos/ecommerce-basic/database"
 	"github.com/golang-demos/ecommerce-basic/models"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func walletDetailsHandler(c *fiber.Ctx) error {
-	id := c.Params("id")
-
-	userObjectId, _ := primitive.ObjectIDFromHex(id)
+	userObjectId := c.Locals("SESSION_USER_ID")
 
 	var wallet models.Wallet
 	database.WalletColllection.FindOne(context.Background(), bson.M{
@@ -42,11 +39,10 @@ func walletDepositHandler(c *fiber.Ctx) error {
 	var postData makeTransactionData
 	c.BodyParser(&postData)
 
-	UserId := c.Params("id")
-	UserObjectId, _ := primitive.ObjectIDFromHex(UserId)
+	userObjectId := c.Locals("SESSION_USER_ID")
 	var user models.User
 	err := database.UserCollection.FindOne(context.Background(), bson.M{
-		"_id": UserObjectId,
+		"_id": userObjectId,
 	}).Decode(&user)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
@@ -64,7 +60,7 @@ func walletDepositHandler(c *fiber.Ctx) error {
 
 	var wallet models.Wallet
 	err = database.WalletColllection.FindOne(context.Background(), bson.M{
-		"user_id": UserObjectId,
+		"user_id": userObjectId,
 	}).Decode(&wallet)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
