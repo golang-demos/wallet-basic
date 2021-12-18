@@ -1,5 +1,23 @@
 ### Ecommerce Basic Example using
 
+## Table Of Contents
+- [Dependencies](#dependencies)
+- [Modules](#modules)
+- [Run](#run)
+  * [Production Mode](#production-mode)
+  * [Development Mode](#development-mode)
+- [Test Run](#test-run)
+    + [User Signup](#user-signup)
+    + [User Login](#user-login)
+    + [Session Details](#session-details)
+    + [Deposit to Wallet](#deposit-to-wallet)
+    + [Withdraw from Wallet](#withdraw-from-wallet)
+    + [Check Wallet Balance](#check-wallet-balance)
+    + [Get Wallet Statement](#get-wallet-statement)
+
+
+
+## Dependencies
 1. Go Language
 2. Mux Router : `go get github.com/gorilla/mux`
 3. MongoDB : `go get github.com/mongodb/mongo-go-driver/mongo`
@@ -14,14 +32,14 @@
 ## Run
 ### Production Mode
 ```
-docker-compose -f docker-compose.yml up
+docker-compose build -f docker-compose.yml up
 ```
 ### Development Mode
 ```
 docker-compose -f docker-compose.dev.yml up
 ```
 
-### Test Run
+## Test Run
 
 
 #### User Signup
@@ -126,7 +144,7 @@ Response:
     "LoggedIn": true,
     "User": {
         "name": "Vinay Jeurkar",
-        "mobile": "9766941956",
+        "mobile": "9766123123",
         "role": "user"
     }
 }
@@ -216,7 +234,7 @@ Details:
 | Description    | This API is used for withdrawing money from user's wallet. It also gives updated balance in response. |
 
 Example:
-```json
+```
 curl --location --request GET "http://localhost:3000/api/v1/wallet" \
 --header 'SESS-TOKEN: <SESS-TOKEN>'
 ```
@@ -241,7 +259,7 @@ Details:
 | Description    | This API is used for fetching complete statement of wallet transactions. |
 
 Example:
-```json
+```
 curl --location --request GET "http://localhost:3000/api/v1/wallet/statement" \
 --header 'SESS-TOKEN: <SESS-TOKEN>'
 ```
