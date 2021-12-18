@@ -18,8 +18,8 @@
 
 
 ## Dependencies
-1. Go Language
-2. Mux Router : `go get github.com/gorilla/mux`
+1. Go Language & Modules
+2. Fiber : `go get github.com/gofiber/fiber`
 3. MongoDB : `go get github.com/mongodb/mongo-go-driver/mongo`
 4. Env : `github.com/joho/godotenv`
 
