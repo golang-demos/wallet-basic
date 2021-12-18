@@ -8,6 +8,7 @@ import (
 	"github.com/golang-demos/ecommerce-basic/database"
 	"github.com/golang-demos/ecommerce-basic/models"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func walletDetailsHandler(c *fiber.Ctx) error {
@@ -104,9 +105,13 @@ func walletDepositHandler(c *fiber.Ctx) error {
 func walletStatementHandler(c *fiber.Ctx) error {
 	userObjectId := c.Locals("SESSION_USER_ID")
 	var transactionList []fiber.Map
+
+	findOptions := options.Find()
+	findOptions.SetSort(bson.M{"created_at": -1})
+
 	cursor, err := database.TransactionColllection.Find(context.Background(), bson.M{
 		"user_id": userObjectId,
-	})
+	}, findOptions)
 	if err != nil {
 		return c.JSON(transactionList)
 	}
