@@ -54,9 +54,8 @@ func (u *User) Init(postData UserSignupData) *User {
 	return u
 }
 
-func (u *User) ToShort() User {
-	var user User
-	user.ID = u.ID
+func (u *User) ToShort() ShortUser {
+	var user ShortUser
 	user.Name = u.Name
 	user.Mobile = u.Mobile
 	user.Role = u.Role
