@@ -44,10 +44,12 @@ func sessionLoginHandler(c *fiber.Ctx) error {
 		c.Set("SESS-TOKEN", token)
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"isLoggedIn": isCorrect,
+			"token":      token,
 		})
 	} else {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"isLoggedIn": isCorrect,
+			"token":      token,
 		})
 	}
 }
