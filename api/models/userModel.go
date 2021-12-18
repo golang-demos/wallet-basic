@@ -111,11 +111,18 @@ func CreateUser(user *User) bool {
 func Login(mobile, password string) (bool, string) {
 
 	hash := md5.Sum([]byte(password))
+	passwordHash := hex.EncodeToString(hash[:])
 
 	var foundUser User
-	err := database.UserCollection.FindOne(context.Background(), bson.D{{"mobile", mobile}, {"passord", hash}}).Decode(&foundUser)
+	err := database.UserCollection.FindOne(context.Background(), bson.D{
+		{"mobile", mobile},
+	}).Decode(&foundUser)
 	if err != nil {
 		log.Print(err)
 	}
-	return false, ""
+	if foundUser.Password != passwordHash {
+		return false, ""
+	}
+
+	return true, foundUser.Token
 }
