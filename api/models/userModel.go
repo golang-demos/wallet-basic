@@ -35,6 +35,12 @@ type UserLoginData struct {
 	Password string `json:"password" validate:"required,min=2,max=16"`
 }
 
+type ShortUser struct {
+	Name   string `json:"name"`
+	Mobile string `json:"mobile"`
+	Role   string `json:"role"`
+}
+
 func (u *User) Init(postData UserSignupData) *User {
 	if u.Role == "" {
 		u.Role = "user"
