@@ -17,6 +17,24 @@ func userSignupHandler(c *fiber.Ctx) error {
 		return c.JSON(errors)
 	}
 
-	result := models.CreateUser(user)
-	return c.JSON(result)
+	isCreated, user := models.CreateUser(user)
+	if isCreated {
+		type ShortUser struct {
+			Name   string `json:"name"`
+			Mobile string `json:"mobile"`
+			Role   string `json:"role"`
+		}
+		var shortUser ShortUser
+		shortUser.Name = user.Name
+		shortUser.Mobile = user.Mobile
+		shortUser.Role = user.Role
+		return c.JSON(fiber.Map{
+			"success": isCreated,
+			"user":    shortUser,
+		})
+	} else {
+		return c.JSON(fiber.Map{
+			"success": isCreated,
+		})
+	}
 }
