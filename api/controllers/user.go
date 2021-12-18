@@ -19,12 +19,7 @@ func userSignupHandler(c *fiber.Ctx) error {
 
 	isCreated, user := models.CreateUser(user)
 	if isCreated {
-		type ShortUser struct {
-			Name   string `json:"name"`
-			Mobile string `json:"mobile"`
-			Role   string `json:"role"`
-		}
-		var shortUser ShortUser
+		var shortUser models.ShortUser
 		shortUser.Name = user.Name
 		shortUser.Mobile = user.Mobile
 		shortUser.Role = user.Role
