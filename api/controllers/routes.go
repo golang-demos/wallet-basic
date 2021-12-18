@@ -42,6 +42,6 @@ func RegisterRoutes(app *fiber.App) {
 	// Deposit to wallet
 	v1.Post("/wallet/make", walletDepositHandler)
 	// Wallet Statement
-	v1.Post("/wallet/statement", walletStatementHandler)
+	v1.Get("/wallet/statement", walletStatementHandler)
 
 }
