@@ -32,7 +32,7 @@
 ## Run
 ### Production Mode
 ```
-docker-compose build -f docker-compose.yml up
+docker-compose -f docker-compose.yml up --build
 ```
 ### Development Mode
 ```
