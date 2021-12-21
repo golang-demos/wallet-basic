@@ -12,7 +12,20 @@ import (
 )
 
 func main() {
-	err := godotenv.Load(".env.dev")
+	appMode := "dev"
+	argsLength := len(os.Args)
+	if argsLength > 0 {
+		if os.Args[0] == "prod" {
+			appMode = "prod"
+		}
+	}
+
+	envFile := ".env.dev"
+	if appMode == "prod" {
+		envFile = ".env"
+	}
+
+	err := godotenv.Load(envFile)
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
