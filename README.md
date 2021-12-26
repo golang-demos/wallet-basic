@@ -30,16 +30,17 @@
 
 
 ## Run
-### Production Mode
-```
-docker-compose -f docker-compose.yml up --build
-```
 ### Development Mode
 ```
 docker-compose -f docker-compose.dev.yml up
 cd ./api
 go run main.go
 ```
+### Production Mode
+```
+docker-compose -f docker-compose.yml up --build
+```
+
 
 ## Test Run
 
